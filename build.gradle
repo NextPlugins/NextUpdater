@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.3.0'
+    id 'me.bristermitten.pdm' version '0.0.30'
+}
+
+group 'com.nextplugins'
+version '1.0.0'
+
+tasks.build.dependsOn('pdm', 'shadowJar')
+
+repositories {
+    mavenCentral()
+    jcenter()
+
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/groups/public/' }
+
+    maven { url = 'https://repo.codemc.org/repository/maven-public' }
+
+    maven { url = 'https://jitpack.io/' }
+}
+
+dependencies {
+    def lombokVersion = '1.18.16'
+    def spigotVersion = '1.16.5-R0.1-SNAPSHOT'
+    def jacksonVersion = '2.12.1'
+    def githubUpdaterVersion = '98849d1a40'
+    def githubApiVersion = '1.123'
+    def commonsVersion = '2.4'
+
+    compileOnly "org.spigotmc:spigot-api:$spigotVersion"
+
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    pdm "com.github.HenryFabio:github-updater:$githubUpdaterVersion"
+    pdm "org.kohsuke:github-api:$githubApiVersion"
+    pdm "commons-io:commons-io:$commonsVersion"
+
+    def lombok = "org.projectlombok:lombok:$lombokVersion"
+
+    compileOnly lombok
+    annotationProcessor lombok
+}
+
+bukkit {
+    main = 'com.nextplugins.nextupdater.NextUpdater'
+    authors = ['Henry_Fabio', 'Eike', 'Gabriel Santos', 'Yuhtin']
+    website = 'https://github.com/NextPlugins'
+    version = "${project.version}"
+}
+
+shadowJar {
+    archiveName("${project.name}-${project.version}.jar")
+}
+
