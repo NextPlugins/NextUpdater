@@ -35,6 +35,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation "org.bstats:bstats-bukkit:2.2.1"
 
     pdm "com.github.HenryFabio:github-updater:$githubUpdaterVersion"
     pdm "org.kohsuke:github-api:$githubApiVersion"
@@ -55,5 +56,7 @@ bukkit {
 
 shadowJar {
     archiveName("${project.name}-${project.version}.jar")
+
+    relocate 'org.bstats', 'com.nextplugins.nextupdater.bstats'
 }
 
