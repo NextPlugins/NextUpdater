@@ -14,10 +14,12 @@ public class PluginUpdater {
     private final String repository;
     private final String owner = "NextPlugins";
 
-    public void init() {
+    public BukkitGithubUpdater init() {
         final BukkitGithubUpdater githubUpdater = new BukkitGithubUpdater(plugin, UpdaterConfiguration.DEFAULT, null);
 
         githubUpdater.registerUpdatablePlugin(new BukkitUpdatablePlugin(plugin, owner + "/" + repository));
+
+        return githubUpdater;
     }
 
 }
