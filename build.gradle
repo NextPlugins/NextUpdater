@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.nextplugins'
-version '1.0.0'
+version '1.0.1'
 
 tasks.build.dependsOn('pdm', 'shadowJar')
 
@@ -52,6 +52,15 @@ bukkit {
     authors = ['Henry_Fabio', 'Eike', 'Gabriel Santos', 'Yuhtin']
     website = 'https://github.com/NextPlugins'
     version = "${project.version}"
+    softDepend = [
+            "NextEconomy",
+            "NextMarket",
+            "NextCash",
+            "NextSorteios",
+            "NextOnlineTime",
+            "NextCommandPassword",
+            "NextTasks"
+    ]
 }
 
 shadowJar {
